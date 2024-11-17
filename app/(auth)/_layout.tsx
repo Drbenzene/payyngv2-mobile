@@ -6,6 +6,7 @@ import Colors from "@/constants/Colors";
 // Import the screens in the auth folder
 import Login from "./login";
 import GetStarted from "./get-started";
+import Onboarding from "./onboarding";
 // import RegisterScreen from "@/auth/register";
 // import ForgotPasswordScreen from "@/auth/forgot-password";
 
@@ -27,9 +28,10 @@ export default function AuthLayout() {
         },
       }}
     >
+      <Stack.Screen name="onboarding" component={Onboarding} />
       <Stack.Screen name="GetStarted" component={GetStarted} />
 
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="login" component={Login} />
     </Stack.Navigator>
   );
 }

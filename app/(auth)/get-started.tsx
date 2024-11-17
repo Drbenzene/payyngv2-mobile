@@ -61,7 +61,7 @@ export default function GetStarted() {
                   textDecorationColor: Colors.bgColor,
                   fontSize: 16,
                   lineHeight: 50.32,
-                  fontFamily: "outfit-medium",
+                  fontFamily: "outfit-regular",
                   color: Colors.bgColor,
                 }}
               >
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   startText: {
     fontSize: 17,
     color: "#fff",
-    fontFamily: "outfit-medium",
+    fontFamily: "outfit-regular",
     textAlign: "center",
   },
   lendBtn: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   lendText: {
     fontSize: 17,
     color: Colors.bgColor,
-    fontFamily: "outfit-medium",
+    fontFamily: "outfit-regular",
     textAlign: "center",
   },
   image: {
