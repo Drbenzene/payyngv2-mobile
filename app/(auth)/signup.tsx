@@ -11,36 +11,40 @@ import PayyngCustomField from "@/components/inputs/PayyngCustomField";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { StatusBar } from "expo-status-bar";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import Colors from "@/constants/Colors";
 import PayyngButton from "@/components/button/PayyngButton";
 import AuthLayout from "@/components/Layouts/AuthLayout";
-import { useRouter } from "expo-router";
+import PayyngBar from "@/components/Layouts/PayyngBar";
 const { width, height } = Dimensions.get("window");
 
-const Login = () => {
+const Signup = () => {
   const { push } = useRouter();
+
   return (
     <AuthLayout>
       <StatusBar style="dark" />
       <Stack.Screen
         options={{
-          title: "login",
+          title: "signup",
           headerShown: false,
           gestureEnabled: false,
         }}
       />
+
       <View style={styles.container}>
         <View>
-          <Text style={styles.headerText}>Welcome Back</Text>
+          <Text style={styles.headerText}>Let's Get Started</Text>
           <Text style={styles.subText}>
-            Enter the email and password associated with your Payyng account
+            Get setup and start enjoying Payyng in 3 minutes
           </Text>
         </View>
         <Formik
           initialValues={{
             email: "",
             password: "",
+            phone: "",
+            referralCode: "",
           }}
           validationSchema={Yup.object({
             email: Yup.string()
@@ -49,7 +53,6 @@ const Login = () => {
             password: Yup.string().required("Required"),
           })}
           onSubmit={(values) => {
-            push("/(auth)/verify-email");
             console.log(values);
           }}
         >
@@ -60,6 +63,7 @@ const Login = () => {
             values,
             errors,
             touched,
+            setValues,
           }) => (
             <View style={styles.formContainer}>
               <PayyngCustomField
@@ -81,7 +85,7 @@ const Login = () => {
                 label="Password"
                 id="password"
                 labelColor={Colors.white}
-                returnKeyType="done"
+                returnKeyType="next"
                 value={values.password}
                 keyboardType="default"
                 placeholder="Password"
@@ -90,36 +94,57 @@ const Login = () => {
                 errorMessage={errors.password}
                 placeholderTextColor={Colors.placeholderTextColor}
               />
-              <TouchableOpacity
-                onPress={() => {
-                  push("/(auth)/forget-password");
-                }}
-              >
-                <Text style={styles.resetPassword}>
-                  Forgot password?{" "}
-                  <Text style={{ color: Colors.white }}>Reset</Text>
-                </Text>
-              </TouchableOpacity>
+
+              <PayyngCustomField
+                type="PHONE"
+                label="Phone Number"
+                id="password"
+                labelColor={Colors.white}
+                returnKeyType="next"
+                value={values.password}
+                keyboardType="default"
+                placeholder="phone"
+                onChangeText={handleChange("phone")}
+                onBlur={handleBlur("phone")}
+                errorMessage={errors.phone}
+                placeholderTextColor={Colors.placeholderTextColor}
+                setValues={setValues}
+                values={values}
+              />
+              <PayyngCustomField
+                type="INPUT"
+                label="Referral Code (Optional)"
+                id="referralCode"
+                returnKeyType="next"
+                value={values.email}
+                labelColor={Colors.white}
+                keyboardType="email-address"
+                placeholder="Email"
+                onChangeText={handleChange("referralCode")}
+                onBlur={handleBlur("referralCode")}
+                errorMessage={errors.referralCode}
+                placeholderTextColor={Colors.placeholderTextColor}
+              />
 
               <View style={styles.buttonAndIndicatorContainer}>
                 <PayyngButton
-                  buttonText="Login"
+                  buttonText="PROCEED"
                   buttonColor={Colors.greenColor}
                   buttonTextColor={Colors.white}
                   onPress={handleSubmit}
                 />
               </View>
 
-              <View style={{}}>
-                <PayyngButton
-                  buttonText="Sign Up"
-                  buttonColor={Colors.newPrimaryColor}
-                  buttonTextColor={Colors.white}
-                  onPress={() => {
-                    push("/(auth)/signup");
-                  }}
-                />
-              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  push("/(auth)/login");
+                }}
+              >
+                <Text style={styles.backToLogin}>
+                  Already have an account?{" "}
+                  <Text style={{ color: Colors.white }}>Login</Text>
+                </Text>
+              </TouchableOpacity>
             </View>
           )}
         </Formik>
@@ -128,7 +153,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
 
 const styles = StyleSheet.create({
   gradientBackground: {
@@ -164,14 +189,14 @@ const styles = StyleSheet.create({
     // justifyContent: "space-between",
     width: "100%",
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 40,
     // paddingHorizontal: s(10),
   },
 
-  resetPassword: {
+  backToLogin: {
     color: Colors.white,
-    textAlign: "right",
-    marginTop: vs(10),
-    fontFamily: "payyng-regular",
+    textAlign: "center",
+    marginTop: vs(20),
+    fontFamily: "payyng-bold",
   },
 });

@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import React from "react";
 import { vs, s, ms } from "react-native-size-matters";
-import PayyngCustomField from "@/components/inputs/PayyngCustomField";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { StatusBar } from "expo-status-bar";
@@ -16,25 +15,27 @@ import Colors from "@/constants/Colors";
 import PayyngButton from "@/components/button/PayyngButton";
 import AuthLayout from "@/components/Layouts/AuthLayout";
 import { useRouter } from "expo-router";
+import PayyngOTPField from "@/components/inputs/PayyngOTPField";
 const { width, height } = Dimensions.get("window");
 
-const Login = () => {
+const VerifyEmail = () => {
   const { push } = useRouter();
   return (
     <AuthLayout>
       <StatusBar style="dark" />
       <Stack.Screen
         options={{
-          title: "login",
+          title: "verify-email",
           headerShown: false,
           gestureEnabled: false,
         }}
       />
       <View style={styles.container}>
         <View>
-          <Text style={styles.headerText}>Welcome Back</Text>
+          <Text style={styles.headerText}>One More Step ✈️</Text>
           <Text style={styles.subText}>
-            Enter the email and password associated with your Payyng account
+            Enter the 6 digits OTP code sent to verify your email and continue
+            enjoying Payyng{" "}
           </Text>
         </View>
         <Formik
@@ -49,7 +50,6 @@ const Login = () => {
             password: Yup.string().required("Required"),
           })}
           onSubmit={(values) => {
-            push("/(auth)/verify-email");
             console.log(values);
           }}
         >
@@ -62,62 +62,20 @@ const Login = () => {
             touched,
           }) => (
             <View style={styles.formContainer}>
-              <PayyngCustomField
-                type="INPUT"
-                label="Email"
-                id="email"
-                returnKeyType="next"
-                value={values.email}
-                labelColor={Colors.white}
-                keyboardType="email-address"
-                placeholder="Email"
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                errorMessage={errors.email}
-                placeholderTextColor={Colors.placeholderTextColor}
-              />
-              <PayyngCustomField
-                type="PASSWORD"
-                label="Password"
-                id="password"
-                labelColor={Colors.white}
-                returnKeyType="done"
-                value={values.password}
-                keyboardType="default"
-                placeholder="Password"
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                errorMessage={errors.password}
-                placeholderTextColor={Colors.placeholderTextColor}
-              />
-              <TouchableOpacity
-                onPress={() => {
-                  push("/(auth)/forget-password");
+              <View
+                style={{
+                  marginVertical: vs(20),
                 }}
               >
-                <Text style={styles.resetPassword}>
-                  Forgot password?{" "}
-                  <Text style={{ color: Colors.white }}>Reset</Text>
-                </Text>
-              </TouchableOpacity>
+                <PayyngOTPField digits={6} onChange={handleChange("otp")} />
+              </View>
 
               <View style={styles.buttonAndIndicatorContainer}>
                 <PayyngButton
-                  buttonText="Login"
+                  buttonText="PROCEED"
                   buttonColor={Colors.greenColor}
                   buttonTextColor={Colors.white}
                   onPress={handleSubmit}
-                />
-              </View>
-
-              <View style={{}}>
-                <PayyngButton
-                  buttonText="Sign Up"
-                  buttonColor={Colors.newPrimaryColor}
-                  buttonTextColor={Colors.white}
-                  onPress={() => {
-                    push("/(auth)/signup");
-                  }}
                 />
               </View>
             </View>
@@ -128,7 +86,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default VerifyEmail;
 
 const styles = StyleSheet.create({
   gradientBackground: {
@@ -142,7 +100,7 @@ const styles = StyleSheet.create({
     paddingTop: vs(20),
   },
   headerText: {
-    fontSize: ms(40),
+    fontSize: ms(30),
     fontWeight: "bold",
     color: Colors.white,
     marginTop: vs(20),
@@ -166,12 +124,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
     // paddingHorizontal: s(10),
-  },
-
-  resetPassword: {
-    color: Colors.white,
-    textAlign: "right",
-    marginTop: vs(10),
-    fontFamily: "payyng-regular",
   },
 });

@@ -46,10 +46,12 @@ const PayyngButton = ({
         style={{
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "center",
           gap: 10,
-          borderRadius: 10,
+          borderRadius: 50,
+          height: 60,
           backgroundColor: buttonColor,
-          paddingVertical: Platform.OS === "ios" ? 13 : 12,
+          paddingVertical: Platform.OS === "ios" ? 15 : 16,
           paddingHorizontal: 14,
           borderWidth: borderWidth,
           borderColor: borderColor,
@@ -57,8 +59,8 @@ const PayyngButton = ({
       >
         <Text
           style={{
-            fontSize: 18,
-            fontFamily: "payyng-regular",
+            fontSize: 20,
+            fontFamily: "payyng-bold",
             textAlign: "center",
             color: buttonTextColor,
           }}

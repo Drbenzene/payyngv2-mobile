@@ -21,7 +21,7 @@ export default {
   secondaryColor: "#EE4266",
   bgColor: "#ffffff",
   black: "#141316",
-  textColor: "#89898A",
+  textColor: "#000",
   btnColor: "#D0D0D0",
   buttonColor2: "#e7e7e8",
   error: "#EE3636",
@@ -31,4 +31,8 @@ export default {
   placeHolderColor: "#626264",
   tintColor: "#008A82",
   searchBarBgColor: "#F9F9F9",
+  placeholderTextColor: "#B1B1B1",
+  white: "#fff",
+  newPrimaryColor: "#141d30",
+  greenColor: "#16493d",
 };

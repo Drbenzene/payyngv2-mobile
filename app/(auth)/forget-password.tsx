@@ -18,38 +18,34 @@ import AuthLayout from "@/components/Layouts/AuthLayout";
 import { useRouter } from "expo-router";
 const { width, height } = Dimensions.get("window");
 
-const Login = () => {
+const ForgetPassword = () => {
   const { push } = useRouter();
   return (
     <AuthLayout>
       <StatusBar style="dark" />
       <Stack.Screen
         options={{
-          title: "login",
+          title: "forgetPassword",
           headerShown: false,
           gestureEnabled: false,
         }}
       />
       <View style={styles.container}>
         <View>
-          <Text style={styles.headerText}>Welcome Back</Text>
+          <Text style={styles.headerText}>Forget Password</Text>
           <Text style={styles.subText}>
-            Enter the email and password associated with your Payyng account
+            Enter your email address and we will help you regain access to your
+            account
           </Text>
         </View>
         <Formik
           initialValues={{
             email: "",
-            password: "",
           }}
           validationSchema={Yup.object({
-            email: Yup.string()
-              .email("Invalid email address")
-              .required("Required"),
-            password: Yup.string().required("Required"),
+            email: Yup.string().email("Invalid email address"),
           })}
           onSubmit={(values) => {
-            push("/(auth)/verify-email");
             console.log(values);
           }}
         >
@@ -76,49 +72,27 @@ const Login = () => {
                 errorMessage={errors.email}
                 placeholderTextColor={Colors.placeholderTextColor}
               />
-              <PayyngCustomField
-                type="PASSWORD"
-                label="Password"
-                id="password"
-                labelColor={Colors.white}
-                returnKeyType="done"
-                value={values.password}
-                keyboardType="default"
-                placeholder="Password"
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                errorMessage={errors.password}
-                placeholderTextColor={Colors.placeholderTextColor}
-              />
-              <TouchableOpacity
-                onPress={() => {
-                  push("/(auth)/forget-password");
-                }}
-              >
-                <Text style={styles.resetPassword}>
-                  Forgot password?{" "}
-                  <Text style={{ color: Colors.white }}>Reset</Text>
-                </Text>
-              </TouchableOpacity>
 
               <View style={styles.buttonAndIndicatorContainer}>
                 <PayyngButton
-                  buttonText="Login"
-                  buttonColor={Colors.greenColor}
-                  buttonTextColor={Colors.white}
-                  onPress={handleSubmit}
-                />
-              </View>
-
-              <View style={{}}>
-                <PayyngButton
-                  buttonText="Sign Up"
+                  buttonText="PROCEED"
                   buttonColor={Colors.newPrimaryColor}
                   buttonTextColor={Colors.white}
                   onPress={() => {
                     push("/(auth)/signup");
                   }}
                 />
+
+                <TouchableOpacity
+                  onPress={() => {
+                    push("/(auth)/login");
+                  }}
+                >
+                  <Text style={styles.backToLogin}>
+                    Remember Now?{" "}
+                    <Text style={{ color: Colors.white }}>Back to Login</Text>
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}
@@ -128,7 +102,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgetPassword;
 
 const styles = StyleSheet.create({
   gradientBackground: {
@@ -160,12 +134,9 @@ const styles = StyleSheet.create({
   },
 
   buttonAndIndicatorContainer: {
-    // flexDirection: "row",
-    // justifyContent: "space-between",
     width: "100%",
     marginBottom: 20,
-    marginTop: 20,
-    // paddingHorizontal: s(10),
+    marginTop: 40,
   },
 
   resetPassword: {
@@ -173,5 +144,12 @@ const styles = StyleSheet.create({
     textAlign: "right",
     marginTop: vs(10),
     fontFamily: "payyng-regular",
+  },
+
+  backToLogin: {
+    color: Colors.white,
+    textAlign: "center",
+    marginTop: vs(20),
+    fontFamily: "payyng-bold",
   },
 });

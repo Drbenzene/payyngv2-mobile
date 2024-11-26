@@ -29,8 +29,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     // SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-    "payyng-bold": require("../assets/fonts/Gorditas-Bold.ttf"),
-    "payyng-regular": require("../assets/fonts/SpaceMono-Regular.ttf"),
+    "payyng-bold": require("../assets/fonts/Exo-ExtraBold.ttf"),
+    "payyng-regular": require("../assets/fonts/Exo-VariableFont_wght.ttf"),
+    // "payyng-light": require("../assets/fonts/Exo-Light.ttf"),
+    // "payyng-medium": require("../assets/fonts/Exo-Medium.ttf"),
+    "payyng-semibold": require("../assets/fonts/Exo-SemiBold.ttf"),
     ...FontAwesome.font,
   });
 

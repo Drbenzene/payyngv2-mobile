@@ -7,8 +7,9 @@ import Colors from "@/constants/Colors";
 import Login from "./login";
 import GetStarted from "./get-started";
 import Onboarding from "./onboarding";
-// import RegisterScreen from "@/auth/register";
-// import ForgotPasswordScreen from "@/auth/forgot-password";
+import Signup from "./signup";
+import ForgetPassword from "./forget-password";
+import VerifyEmail from "./verify-email";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,8 +31,10 @@ export default function AuthLayout() {
     >
       <Stack.Screen name="onboarding" component={Onboarding} />
       <Stack.Screen name="GetStarted" component={GetStarted} />
-
       <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="signup" component={Signup} />
+      <Stack.Screen name="forget-password" component={ForgetPassword} />
+      <Stack.Screen name="verify-email" component={VerifyEmail} />
     </Stack.Navigator>
   );
 }
