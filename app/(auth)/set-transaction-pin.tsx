@@ -1,55 +1,47 @@
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { vs, s, ms } from "react-native-size-matters";
+import { ms, vs, s } from "react-native-size-matters";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { StatusBar } from "expo-status-bar";
 import { Stack } from "expo-router";
-import Colors from "@/constants/Colors";
-import PayyngButton from "@/components/button/PayyngButton";
 import AuthLayout from "@/components/Layouts/AuthLayout";
-import { useRouter } from "expo-router";
+import PayyngButton from "@/components/button/PayyngButton";
 import PayyngOTPField from "@/components/inputs/PayyngOTPField";
-const { width, height } = Dimensions.get("window");
+import { useRouter } from "expo-router";
+import Colors from "@/constants/Colors";
+import PayyngCustomField from "@/components/inputs/PayyngCustomField";
 
-const VerifyEmail = () => {
+const SetTransactionPin = () => {
   const { push } = useRouter();
   return (
     <AuthLayout>
       <StatusBar style="dark" />
       <Stack.Screen
         options={{
-          title: "verify-email",
+          title: "set-transaction-pin",
           headerShown: false,
           gestureEnabled: false,
         }}
       />
       <View style={styles.container}>
         <View>
-          <Text style={styles.headerText}>One More Step ✈️</Text>
+          <Text style={styles.headerText}>Set Transaction Pin</Text>
           <Text style={styles.subText}>
-            Enter the 6 digits OTP code sent to verify your email and continue
-            enjoying Payyng{" "}
+            Enter your 4 digits Transaction pin to secure your account
           </Text>
         </View>
         <Formik
           initialValues={{
-            email: "",
+            otp: "",
             password: "",
+            confirmPassword: "",
           }}
-          // validationSchema={Yup.object({
-          //   email: Yup.string()
-          //     .email("Invalid email address")
-          //     .required("Required"),
-          // })}
+          validationSchema={Yup.object({
+            otp: Yup.string().required("Required"),
+          })}
           onSubmit={(values) => {
-            push("/(auth)/set-transaction-pin");
+            push("/(tabs)/");
             console.log(values);
           }}
         >
@@ -62,31 +54,31 @@ const VerifyEmail = () => {
             touched,
           }) => (
             <View style={styles.formContainer}>
+              <PayyngOTPField digits={4} onChange={handleChange("otp")} />
+
               <View
                 style={{
-                  marginVertical: vs(20),
+                  marginTop: vs(20),
                 }}
               >
-                <PayyngOTPField digits={6} onChange={handleChange("otp")} />
-              </View>
-
-              <View style={styles.buttonAndIndicatorContainer}>
                 <PayyngButton
-                  buttonText="PROCEED"
+                  onPress={handleSubmit}
+                  buttonText={"PROCEED"}
                   buttonColor={Colors.greenColor}
                   buttonTextColor={Colors.white}
-                  onPress={handleSubmit}
                 />
-                <TouchableOpacity
-                  onPress={() => {
-                    push("/(auth)/login");
-                  }}
-                >
-                  <Text style={styles.resendOtp}>
-                    Resend <Text style={{ color: Colors.white }}>OTP</Text>
-                  </Text>
-                </TouchableOpacity>
               </View>
+
+              <TouchableOpacity
+                onPress={() => {
+                  push("/(auth)/login");
+                }}
+              >
+                <Text style={styles.backToLogin}>
+                  Remember Now?{" "}
+                  <Text style={{ color: Colors.white }}>Back to Login</Text>
+                </Text>
+              </TouchableOpacity>
             </View>
           )}
         </Formik>
@@ -95,21 +87,16 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default SetTransactionPin;
 
 const styles = StyleSheet.create({
-  gradientBackground: {
-    flex: 1,
-    width: width,
-    height: height,
-  },
   container: {
     flex: 1,
     paddingHorizontal: s(16),
     paddingTop: vs(20),
   },
   headerText: {
-    fontSize: ms(30),
+    fontSize: ms(40),
     fontWeight: "bold",
     color: Colors.white,
     marginTop: vs(20),
@@ -124,18 +111,13 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     justifyContent: "center",
+    marginVertical: 20,
+  },
+  button: {
+    marginTop: vs(20),
   },
 
-  buttonAndIndicatorContainer: {
-    // flexDirection: "row",
-    // justifyContent: "space-between",
-    width: "100%",
-    marginBottom: 20,
-    marginTop: 20,
-    // paddingHorizontal: s(10),
-  },
-
-  resendOtp: {
+  backToLogin: {
     color: Colors.white,
     textAlign: "center",
     marginTop: vs(20),

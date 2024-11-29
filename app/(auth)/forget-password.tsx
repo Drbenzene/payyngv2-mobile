@@ -79,7 +79,7 @@ const ForgetPassword = () => {
                   buttonColor={Colors.newPrimaryColor}
                   buttonTextColor={Colors.white}
                   onPress={() => {
-                    push("/(auth)/signup");
+                    push("/(auth)/validate-otp-forget-password");
                   }}
                 />
 

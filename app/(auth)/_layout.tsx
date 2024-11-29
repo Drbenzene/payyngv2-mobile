@@ -10,6 +10,8 @@ import Onboarding from "./onboarding";
 import Signup from "./signup";
 import ForgetPassword from "./forget-password";
 import VerifyEmail from "./verify-email";
+import ValidateForgetPasswordOtp from "./validate-otp-forget-password";
+import SetTransactionPin from "./set-transaction-pin";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +37,11 @@ export default function AuthLayout() {
       <Stack.Screen name="signup" component={Signup} />
       <Stack.Screen name="forget-password" component={ForgetPassword} />
       <Stack.Screen name="verify-email" component={VerifyEmail} />
+      <Stack.Screen
+        name="validate-otp-forget-password"
+        component={ValidateForgetPasswordOtp}
+      />
+      <Stack.Screen name="set-transaction-pin" component={SetTransactionPin} />
     </Stack.Navigator>
   );
 }

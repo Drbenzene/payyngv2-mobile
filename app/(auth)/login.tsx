@@ -49,7 +49,7 @@ const Login = () => {
             password: Yup.string().required("Required"),
           })}
           onSubmit={(values) => {
-            push("/(auth)/verify-email");
+            push("/(tabs)/");
             console.log(values);
           }}
         >

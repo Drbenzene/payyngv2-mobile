@@ -53,6 +53,7 @@ const Signup = () => {
             password: Yup.string().required("Required"),
           })}
           onSubmit={(values) => {
+            push("/(auth)/verify-email");
             console.log(values);
           }}
         >
