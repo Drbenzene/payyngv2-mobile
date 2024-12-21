@@ -24,24 +24,28 @@ const HomeScreen = () => {
       currency: "NGN",
       balance: "₦50,000.00",
       accountNumber: "1234-5678-9101",
+      flag: "https://flagcdn.com/w320/ng.png",
     },
     {
       id: 2,
       currency: "USD",
       balance: "$1,250.00",
       accountNumber: "1234-5678-9101",
+      flag: "https://flagcdn.com/w320/us.png",
     },
     {
       id: 3,
       currency: "EUR",
       balance: "€800.00",
       accountNumber: "2234-5678-9101",
+      flag: "https://flagcdn.com/w320/eu.png",
     },
     {
       id: 4,
       currency: "NGN",
       balance: "₦500,000.00",
       accountNumber: "3234-5678-9101",
+      flag: "https://flagcdn.com/w320/ng.png",
     },
   ];
 
@@ -104,7 +108,13 @@ const HomeScreen = () => {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View style={styles.currencyCard}>
-                  <Text style={styles.currencyText}>{item.currency}</Text>
+                  <View style={styles.currencyHeader}>
+                    <Image
+                      source={{ uri: item.flag }}
+                      style={styles.flagIcon}
+                    />
+                    <Text style={styles.currencyText}>{item.currency}</Text>
+                  </View>
                   <Text style={styles.balanceText}>{item.balance}</Text>
                   <Text style={styles.accountText}>{item.accountNumber}</Text>
                   <View style={styles.cardActions}>
@@ -114,6 +124,7 @@ const HomeScreen = () => {
                         size={20}
                         color={Colors.greenColor}
                       />
+                      <Text style={styles.iconText}>Send</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.cardButton}>
                       <MaterialIcons
@@ -121,6 +132,7 @@ const HomeScreen = () => {
                         size={20}
                         color={Colors.greenColor}
                       />
+                      <Text style={styles.iconText}>Receive</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.cardButton}>
                       <Ionicons
@@ -128,6 +140,7 @@ const HomeScreen = () => {
                         size={20}
                         color={Colors.greenColor}
                       />
+                      <Text style={styles.iconText}>Exchange</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -150,7 +163,7 @@ const HomeScreen = () => {
             </View>
 
             {/* Recent Transactions */}
-            <Text style={styles.sectionHeader}>Recentss Transactions</Text>
+            <Text style={styles.sectionHeader}>Recent Transactions</Text>
             {recentTransactions.map((transaction) => (
               <View key={transaction.id} style={styles.transactionItem}>
                 <Text style={styles.transactionDate}>{transaction.date}</Text>
@@ -212,7 +225,6 @@ const styles = StyleSheet.create({
     fontFamily: "payyng-bold",
     color: Colors.white,
   },
-
   currencyCard: {
     backgroundColor: Colors.greenColor,
     borderRadius: 12,
@@ -224,7 +236,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
-    fontFamily: "payyng-bold",
+  },
+  currencyHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  flagIcon: {
+    width: 50,
+    height: 40,
+    marginRight: 8,
+    borderRadius: 50,
   },
   currencyText: {
     color: "#fff",
@@ -250,10 +272,16 @@ const styles = StyleSheet.create({
   cardButton: {
     backgroundColor: "#fff",
     borderRadius: 50,
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
+    padding: 4,
+  },
+  iconText: {
+    fontSize: 10,
+    fontWeight: "bold",
+    color: Colors.greenColor,
   },
   sectionHeader: {
     fontSize: 18,
