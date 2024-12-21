@@ -30,12 +30,12 @@ const LoginWithPassword = () => {
           email: "",
           password: "",
         }}
-        validationSchema={Yup.object({
-          email: Yup.string()
-            .email("Invalid email address")
-            .required("Required"),
-          password: Yup.string().required("Required"),
-        })}
+        // validationSchema={Yup.object({
+        //   email: Yup.string()
+        //     .email("Invalid email address")
+        //     .required("Required"),
+        //   password: Yup.string().required("Required"),
+        // })}
         onSubmit={(values) => {
           push("/(tabs)/");
           console.log(values);
