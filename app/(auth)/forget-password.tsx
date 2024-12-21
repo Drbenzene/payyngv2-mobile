@@ -42,9 +42,9 @@ const ForgetPassword = () => {
           initialValues={{
             email: "",
           }}
-          validationSchema={Yup.object({
-            email: Yup.string().email("Invalid email address"),
-          })}
+          // validationSchema={Yup.object({
+          //   email: Yup.string().email("Invalid email address"),
+          // })}
           onSubmit={(values) => {
             console.log(values);
           }}

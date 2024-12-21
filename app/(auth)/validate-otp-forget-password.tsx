@@ -30,9 +30,9 @@ const ValidateForgetPasswordOtp = () => {
             password: "",
             confirmPassword: "",
           }}
-          validationSchema={Yup.object({
-            otp: Yup.string().required("Required"),
-          })}
+          // validationSchema={Yup.object({
+          //   otp: Yup.string().required("Required"),
+          // })}
           onSubmit={(values) => {
             console.log(values);
           }}
