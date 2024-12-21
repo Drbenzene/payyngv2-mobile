@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   indicator: {
     height: 4,
     width: 20,
-    backgroundColor: colors.primaryColor,
+    backgroundColor: colors.greenColor,
     borderRadius: 10,
   },
   indicatorContainer: {

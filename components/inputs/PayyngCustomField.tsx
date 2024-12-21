@@ -193,5 +193,6 @@ const styles = StyleSheet.create({
     fontFamily: "payyng-regular",
     fontSize: Platform.OS === "ios" ? 16 : 15,
     paddingVertical: 3,
+    color: colors.black,
   },
 });

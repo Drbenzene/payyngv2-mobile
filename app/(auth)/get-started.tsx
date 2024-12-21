@@ -38,7 +38,7 @@ export default function GetStarted() {
             }}
           >
             <TouchableOpacity style={styles.startBtn} onPress={() => {}}>
-              <Text style={styles.startText}>Sign up as Borrower</Text>
+              <Text style={styles.startText}>Sign up on Payyng</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

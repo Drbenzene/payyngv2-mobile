@@ -10,7 +10,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import Onboarding from "./(auth)/onboarding";
-
+// import "../global.css"
 import { useColorScheme } from "@/components/useColorScheme";
 
 export {

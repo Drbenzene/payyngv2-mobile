@@ -24,13 +24,6 @@ const ValidateForgetPasswordOtp = () => {
         }}
       />
       <View style={styles.container}>
-        <View>
-          <Text style={styles.headerText}>Forget Password</Text>
-          <Text style={styles.subText}>
-            Enter the 6 digits OTP code sent to your email to reset your
-            password
-          </Text>
-        </View>
         <Formik
           initialValues={{
             otp: "",
@@ -52,63 +45,95 @@ const ValidateForgetPasswordOtp = () => {
             errors,
             touched,
           }) => (
-            <View style={styles.formContainer}>
-              <PayyngOTPField digits={6} onChange={handleChange("otp")} />
+            <>
+              <View>
+                <Text style={styles.headerText}>Forget Password</Text>
+                {values.otp?.length < 4 && (
+                  <Text style={styles.subText}>
+                    Enter the 6 digits OTP code sent to your email to reset your
+                    password
+                  </Text>
+                )}
 
-              <PayyngCustomField
-                type="PASSWORD"
-                label="Password"
-                id="password"
-                labelColor={Colors.white}
-                returnKeyType="done"
-                value={values.password}
-                keyboardType="default"
-                placeholder="Password"
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                errorMessage={errors.password}
-                placeholderTextColor={Colors.placeholderTextColor}
-              />
-
-              <PayyngCustomField
-                type="PASSWORD"
-                label="Confirm Password"
-                id="confirmPassword"
-                labelColor={Colors.white}
-                returnKeyType="done"
-                value={values.confirmPassword}
-                keyboardType="default"
-                placeholder="Confirm password"
-                onChangeText={handleChange("confirmPassword")}
-                onBlur={handleBlur("confirmPassword")}
-                errorMessage={errors.confirmPassword}
-                placeholderTextColor={Colors.placeholderTextColor}
-              />
-
-              <View
-                style={{
-                  marginTop: vs(20),
-                }}
-              >
-                <PayyngButton
-                  onPress={handleSubmit}
-                  buttonText={"PROCEED"}
-                  buttonColor={Colors.greenColor}
-                  buttonTextColor={Colors.white}
-                />
+                {values.otp?.length === 4 && (
+                  <Text style={styles.subText}>
+                    Enter your new password and confirm it to reset your
+                    password
+                  </Text>
+                )}
               </View>
+              <View style={styles.formContainer}>
+                {values.otp?.length < 4 && (
+                  <PayyngOTPField digits={4} onChange={handleChange("otp")} />
+                )}
 
-              <TouchableOpacity
-                onPress={() => {
-                  push("/(auth)/login");
-                }}
-              >
-                <Text style={styles.backToLogin}>
-                  Remember Now?{" "}
-                  <Text style={{ color: Colors.white }}>Back to Login</Text>
-                </Text>
-              </TouchableOpacity>
-            </View>
+                {values.otp?.length === 4 && (
+                  <>
+                    <PayyngCustomField
+                      type="PASSWORD"
+                      label="Password"
+                      id="password"
+                      labelColor={Colors.white}
+                      returnKeyType="done"
+                      value={values.password}
+                      keyboardType="default"
+                      placeholder="Password"
+                      onChangeText={handleChange("password")}
+                      onBlur={handleBlur("password")}
+                      errorMessage={errors.password}
+                      placeholderTextColor={Colors.placeholderTextColor}
+                    />
+
+                    <PayyngCustomField
+                      type="PASSWORD"
+                      label="Confirm Password"
+                      id="confirmPassword"
+                      labelColor={Colors.white}
+                      returnKeyType="done"
+                      value={values.confirmPassword}
+                      keyboardType="default"
+                      placeholder="Confirm password"
+                      onChangeText={handleChange("confirmPassword")}
+                      onBlur={handleBlur("confirmPassword")}
+                      errorMessage={errors.confirmPassword}
+                      placeholderTextColor={Colors.placeholderTextColor}
+                    />
+                  </>
+                )}
+
+                <>
+                  {values?.otp.length === 4 && (
+                    <>
+                      <View
+                        style={{
+                          marginTop: vs(20),
+                        }}
+                      >
+                        <PayyngButton
+                          onPress={handleSubmit}
+                          buttonText={"PROCEED"}
+                          buttonColor={Colors.greenColor}
+                          buttonTextColor={Colors.white}
+                        />
+                      </View>
+
+                      <TouchableOpacity
+                        onPress={() => {
+                          push("/(auth)/login");
+                        }}
+                      >
+                        <Text style={styles.backToLogin}>
+                          Remember Now?{" "}
+                          <Text style={{ color: Colors.white }}>
+                            Back to Login
+                          </Text>
+                        </Text>
+                      </TouchableOpacity>
+                    </>
+                  )}
+                </>
+              </View>
+            </>
           )}
         </Formik>
       </View>
